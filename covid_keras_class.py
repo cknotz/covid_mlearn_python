@@ -26,3 +26,18 @@ data = pd.read_stata(path)
 data.head()
 
 # Selecting relevant predictors
+data.columns
+
+df = data[['res_id',
+           'resp_gender',
+           'resp_age',
+           'resp_edu',
+           'resp_region',
+           'resp_diag',
+           'r_work_before',
+           'ZIP',
+           'res_income']]
+
+del parpath, path, data # removing clutter
+
+# Data mangling
