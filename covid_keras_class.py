@@ -41,3 +41,4 @@ df = data[['res_id',
 del parpath, path, data # removing clutter
 
 # Data mangling
+df['ZIP'].describe()
