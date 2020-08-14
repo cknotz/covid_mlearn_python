@@ -60,6 +60,15 @@ del df['ZIP']
 # Check categorical vars (gender, diagnosis, region, edu, r_work before, income)
 
 df['resp_gender'].describe()
+df['resp_gender'].unique()
+
+
+
+
+
+
+
+
 df['resp_diag'].describe()
 df['res_income'].unique()
 
