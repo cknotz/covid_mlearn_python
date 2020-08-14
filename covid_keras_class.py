@@ -11,7 +11,6 @@ import os
 import numpy as np
 import pandas as pd
 
-
 # File path
 print(os.getcwd())
 parpath = os.path.dirname(os.path.abspath('.'))
@@ -58,18 +57,34 @@ df['zip1'].unique()
 del df['ZIP']
 
 # Check categorical vars (gender, diagnosis, region, edu, r_work before, income)
+df.dtypes
 
-df['resp_gender'].describe()
-df['resp_gender'].unique()
+# Gender
+df['male'] = pd.get_dummies(df['resp_gender']).iloc[:, 0]
+df['male'].dtypes
+del df['resp_gender']
+
+# Region
+df['german'] = pd.get_dummies(df['resp_region']).iloc[:, 0]
+df['german'].dtypes
+del df['resp_region']
+
+# Diagnosis
+df['notdiag'] = pd.get_dummies(df['resp_diag']).iloc[:, 0]
+df['notdiag'].dtypes
+del df['resp_diag']
+
+# Education
+edu = pd.get_dummies(df['resp_edu']).iloc[:, 1:]
+edu
+df = pd.concat([df, edu], axis = 1, sort = False)
+del df['resp_edu']
+
+
+df.dtypes
 
 
 
-
-
-
-
-
-df['resp_diag'].describe()
 df['res_income'].unique()
 
 # Preprocessing
