@@ -18,7 +18,7 @@ path = os.path.join(parpath,
                     'R Analysis',
                     'covid_dashboard',
                     'dashdata.dta')
-path
+print(path)
 
 # Reading dataset
 data = pd.read_stata(path)
@@ -39,10 +39,12 @@ df = data[['resp_gender',
 del parpath, path, data # removing clutter
 
 df.describe()
+
 df.head()
 
 # Checking for missings
 df.isna().any().any()
+
 df.isna().sum().sum() # no
 # 'income' contains non-answers, but not coded as missings!
 
@@ -62,6 +64,8 @@ df = pd.concat([df,zip], axis = 1, sort = False)
 del df['zip1']
 
 # Check categorical vars (gender, diagnosis, region, r_work before)
+df.columns
+
 df.dtypes
 
 # Gender
@@ -108,7 +112,7 @@ df['edu'] = df['resp_edu'].replace(edu_mapper)
 df['edu'].unique()
 del df['resp_edu']
 
-
+df.columns
 df.dtypes # looks ok
 
 # Preprocessing
@@ -122,6 +126,7 @@ labels = df['diag']
 
 features = np.array(features)
 labels = np.array(labels)
+labels
 
 # Split into test, validation, and training data
 from sklearn.model_selection import train_test_split
@@ -140,14 +145,7 @@ print("Number of validation samples:", len(X_val))
 print("Number of test samples:", len(X_test))
 
 
-
 # Analyze class imbalance
-counts = np.bincount(y_train)
-print(
-    "Number of positive samples in training data: {} ({:.2f}% of total)".format(
-        counts[1], 100 * float(counts[1]) / len(y_train)
-    )
-)
 counts = np.bincount(y_val)
 print(
     "Number of positive samples in validation data: {} ({:.2f}% of total)".format(
@@ -160,16 +158,63 @@ print(
         counts[1], 100 * float(counts[1]) / len(y_test)
     )
 )
+counts = np.bincount(y_train)
+print(
+    "Number of positive samples in training data: {} ({:.2f}% of total)".format(
+        counts[1], 100 * float(counts[1]) / len(y_train)
+    )
+)
 # consider adjusting seed?
 
+weight_for_0 = 1.0 / counts[0]
+weight_for_1 = 1.0 / counts[1]
 
+
+X_train.shape
+X_train.dtype
+
+# features need change of data type
+X_train = X_train.astype('float64')
+X_val = X_val.astype('float64')
+X_test = X_test.astype('float64')
+
+# labels need reshaping
+y_train = np.reshape(y_train, (len(y_train), 1))
+y_val = np.reshape(y_val, (len(y_val), 1))
+y_test = np.reshape(y_test, (len(y_test), 1))
+
+y_train.shape
+y_val.shape
+y_test.shape
 
 # Standardize (age, edu)
-from sklearn import preprocessing
+age_mean = np.mean(X_train[:, 0])
+age_sd = np.std(X_train[:, 0])
 
+X_train[:, 0] -= age_mean
+X_train[:, 0] /= age_sd
 
+X_val[:, 0] -= age_mean
+X_val[:, 0] /= age_sd
 
+X_test[:, 0] -= age_mean
+X_test[:, 0] /= age_sd
 
+edu_mean = np.mean(X_train[:, 29])
+edu_sd = np.std(X_train[:, 29])
+
+X_train[:, 29] -= edu_mean
+X_train[:, 29] /= edu_sd
+
+X_val[:, 29] -= edu_mean
+X_val[:, 29] /= edu_sd
+
+X_test[:, 29] -= edu_mean
+X_test[:, 29] /= edu_sd
+
+# Build model in Keras
+######################
+from tensorflow import keras
 
 
 ##
