@@ -65,19 +65,14 @@ del df['zip1']
 df.dtypes
 
 # Gender
-df['male'] = pd.get_dummies(df['resp_gender'])
-df['male'].dtypes
+gender = pd.get_dummies(df['resp_gender'])
+df = pd.concat([df,gender], axis = 1, sort = False)
 del df['resp_gender']
 
 # Region
-df['german'] = pd.get_dummies(df['resp_region'])
-df['german'].dtypes
+region = pd.get_dummies(df['resp_region'])
+df = pd.concat([df,region], axis = 1, sort = False)
 del df['resp_region']
-
-# Diagnosis
-df['notdiag'] = pd.get_dummies(df['resp_diag'])
-df['notdiag'].dtypes
-del df['resp_diag']
 
 # Employment status
 work = pd.get_dummies(df['r_work_before'])
@@ -91,6 +86,13 @@ inc
 df = pd.concat([df,inc], axis = 1, sort = False)
 del df['res_income']
 # Note: Income is treated as nominal rather than ordinal to avoid losing around 300 obs that refused to state their income;
+
+# Diagnosis
+diag_mapper = {'No': 0,
+               'Yes': 1}
+df['diag'] = df['resp_diag'].replace(diag_mapper)
+df['diag'].value_counts()
+del df['resp_diag']
 
 # Ordinal variable, education
 df['resp_edu'].value_counts()
