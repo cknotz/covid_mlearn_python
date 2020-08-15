@@ -1,6 +1,6 @@
-## Project - Using Keras neural net for credit card default classification to classify COVID-cases
+## Project - Using Keras neural net for credit card fraud detection to classify COVID-cases
 
-An attempt to use a Keras neural network designed to classify credit card defaults to predict COVID-19 diagnoses in the Swiss population.
+An attempt to use a Keras neural network designed to classify credit card fraud to predict COVID-19 diagnoses in the Swiss population. The analysis follows the example analysis by Fancois Chollet (https://keras.io/examples/structured_data/imbalanced_classification/).
 
 This is work in progress.
 
