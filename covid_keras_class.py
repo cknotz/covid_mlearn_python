@@ -108,15 +108,68 @@ df['edu'] = df['resp_edu'].replace(edu_mapper)
 df['edu'].unique()
 del df['resp_edu']
 
+
 df.dtypes # looks ok
 
 # Preprocessing
 ###############
-import sklearn as sk
-
-# Standardize
 
 # Convert to np array
+features = df.drop('diag', axis = 1)
+features
+
+labels = df['diag']
+
+features = np.array(features)
+labels = np.array(labels)
+
+# Split into test, validation, and training data
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(features, labels,
+                                                    test_size = .4,
+                                                    random_state= 13)
+
+X_test, X_val, y_test, y_val = train_test_split(X_test, y_test,
+                                                test_size = 0.5,
+                                                random_state = 13)
+
+
+print("Number of training samples:", len(X_train))
+print("Number of validation samples:", len(X_val))
+print("Number of test samples:", len(X_test))
+
+
+
+# Analyze class imbalance
+counts = np.bincount(y_train)
+print(
+    "Number of positive samples in training data: {} ({:.2f}% of total)".format(
+        counts[1], 100 * float(counts[1]) / len(y_train)
+    )
+)
+counts = np.bincount(y_val)
+print(
+    "Number of positive samples in validation data: {} ({:.2f}% of total)".format(
+        counts[1], 100 * float(counts[1]) / len(y_val)
+    )
+)
+counts = np.bincount(y_test)
+print(
+    "Number of positive samples in test data: {} ({:.2f}% of total)".format(
+        counts[1], 100 * float(counts[1]) / len(y_test)
+    )
+)
+# consider adjusting seed?
+
+
+
+# Standardize (age, edu)
+from sklearn import preprocessing
+
+
+
+
 
 
 ##
