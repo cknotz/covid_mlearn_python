@@ -1,5 +1,5 @@
-# Classification of COVID-diagnoses using neural net for credit card default
-############################################################################
+# Classification of COVID-diagnoses using neural net for credit card fraud
+##########################################################################
 
 # Carlo Knotz
 
