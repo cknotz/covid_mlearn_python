@@ -227,6 +227,8 @@ model = keras.Sequential(
         ),
         keras.layers.Dense(15, activation="relu"),
         keras.layers.Dropout(0.3),
+        keras.layers.Dense(15, activation="relu"),
+        keras.layers.Dropout(0.3),
         keras.layers.Dense(1, activation="sigmoid"),
     ]
 )
