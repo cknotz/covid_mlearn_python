@@ -215,6 +215,49 @@ X_test[:, 29] /= edu_sd
 # Build model in Keras
 ######################
 from tensorflow import keras
+#from tensorflow.keras import layers
+#from tensorflow.keras import Sequential
+#from tensorflow.keras.layers import Dense
+
+# Define model
+model = keras.Sequential(
+    [
+        keras.layers.Dense(
+            30, activation="relu", input_shape=(30,)
+        ),
+        keras.layers.Dense(15, activation="relu"),
+        keras.layers.Dropout(0.3),
+        keras.layers.Dense(1, activation="sigmoid"),
+    ]
+)
+model.summary()
+
+# Train model with 'class_weight' argument
+metrics = [
+    keras.metrics.FalseNegatives(name="fn"),
+    keras.metrics.FalsePositives(name="fp"),
+    keras.metrics.TrueNegatives(name="tn"),
+    keras.metrics.TruePositives(name="tp"),
+    keras.metrics.Precision(name="precision"),
+    keras.metrics.Recall(name="recall"),
+]
+
+model.compile(
+    optimizer=keras.optimizers.Adam(1e-2), loss="binary_crossentropy", metrics=metrics
+)
+
+callbacks = [keras.callbacks.ModelCheckpoint("diagn_model_at_epoch_{epoch}.h5")]
+class_weight = {0: weight_for_0, 1: weight_for_1}
+
+model.fit(
+    X_train,
+    y_train,
+    epochs=30,
+    verbose=2,
+    callbacks=callbacks,
+    validation_data=(X_val, y_val),
+    class_weight=class_weight,
+)
 
 
 ##
