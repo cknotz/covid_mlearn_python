@@ -203,10 +203,10 @@ from tensorflow import keras
 model = keras.Sequential(
     [
         keras.layers.Dense(
-            30, activation="relu", input_shape=(30,)
+            2, activation="relu", input_shape=(30,)
         ),
-        keras.layers.Dense(15, activation="relu"),
-        keras.layers.Dropout(0.3),
+        keras.layers.Dense(10, activation="relu"),
+        keras.layers.Dropout(0.35),
         keras.layers.Dense(1, activation="sigmoid"),
     ]
 )
@@ -232,11 +232,11 @@ model.compile(
 # New callback
 callbacks = [keras.callbacks.ModelCheckpoint(
     filepath = "best_spec.hdf5",
-    monitor = "val_loss",
+    monitor = "val_precision",
     verbose = 1,
     save_best_only = True,
     save_weights_only = False,
-    mode = "auto",
+    mode = "max",
     save_freq = "epoch",
 )]
 
