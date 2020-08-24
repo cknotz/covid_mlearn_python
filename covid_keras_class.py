@@ -227,10 +227,10 @@ model.compile(
 )
 
 # Original callback
-callbacks1 = [keras.callbacks.ModelCheckpoint("diagn_model_at_epoch_{epoch}.h5")]
+#callbacks = [keras.callbacks.ModelCheckpoint("diagn_model_at_epoch_{epoch}.h5")]
 
 # New callback
-callbacks2 = [keras.callbacks.ModelCheckpoint(
+callbacks = [keras.callbacks.ModelCheckpoint(
     filepath = "weights.{epoch:02d}-{val_loss:.4f}.hdf5",
     monitor = "val_loss",
     verbose = 1,
@@ -247,7 +247,7 @@ model.fit(
     y_train,
     epochs=30,
     verbose=2,
-    callbacks=callbacks2,
+    callbacks=callbacks,
     validation_data=(X_test, y_test),
     class_weight=class_weight,
 )
