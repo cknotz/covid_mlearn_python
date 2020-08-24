@@ -224,7 +224,7 @@ metrics = [
 ]
 
 model.compile(
-    optimizer=keras.optimizers.Adam(1e-2), loss="binary_crossentropy", metrics=metrics
+    optimizer=keras.optimizers.Adam(0.1), loss="binary_crossentropy", metrics=metrics
 )
 
 callbacks = [keras.callbacks.ModelCheckpoint("diagn_model_at_epoch_{epoch}.h5")]
