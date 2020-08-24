@@ -231,7 +231,7 @@ model.compile(
 
 # New callback
 callbacks = [keras.callbacks.ModelCheckpoint(
-    filepath = "weights.{epoch:02d}-{val_loss:.4f}.hdf5",
+    filepath = "best_spec.hdf5",
     monitor = "val_loss",
     verbose = 1,
     save_best_only = True,
@@ -242,7 +242,7 @@ callbacks = [keras.callbacks.ModelCheckpoint(
 
 class_weight = {0: weight_for_0, 1: weight_for_1}
 
-model.fit(
+hist = model.fit(
     X_train,
     y_train,
     epochs=30,
@@ -252,5 +252,6 @@ model.fit(
     class_weight=class_weight,
 )
 
+pd.DataFrame(hist.history).to_csv("history.csv")
 
 ##
