@@ -203,7 +203,7 @@ from tensorflow import keras
 model = keras.Sequential(
     [
         keras.layers.Dense(
-            2, activation="relu", input_shape=(30,)
+            30, activation="relu", input_shape=(30,)
         ),
         keras.layers.Dense(10, activation="relu"),
         keras.layers.Dropout(0.35),
