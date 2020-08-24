@@ -226,7 +226,20 @@ model.compile(
     optimizer=keras.optimizers.Adam(0.1), loss="binary_crossentropy", metrics=metrics
 )
 
-callbacks = [keras.callbacks.ModelCheckpoint("diagn_model_at_epoch_{epoch}.h5")]
+# Original callback
+callbacks1 = [keras.callbacks.ModelCheckpoint("diagn_model_at_epoch_{epoch}.h5")]
+
+# New callback
+callbacks2 = [keras.callbacks.ModelCheckpoint(
+    filepath = "weights.{epoch:02d}-{val_loss:.4f}.hdf5",
+    monitor = "val_loss",
+    verbose = 1,
+    save_best_only = True,
+    save_weights_only = False,
+    mode = "auto",
+    save_freq = "epoch",
+)]
+
 class_weight = {0: weight_for_0, 1: weight_for_1}
 
 model.fit(
@@ -234,7 +247,7 @@ model.fit(
     y_train,
     epochs=30,
     verbose=2,
-    callbacks=callbacks,
+    callbacks=callbacks2,
     validation_data=(X_test, y_test),
     class_weight=class_weight,
 )
