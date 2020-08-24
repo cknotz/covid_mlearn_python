@@ -236,7 +236,7 @@ model.fit(
     epochs=30,
     verbose=2,
     callbacks=callbacks,
-    validation_data=(X_val, y_val),
+    validation_data=(X_test, y_test),
     class_weight=class_weight,
 )
 
