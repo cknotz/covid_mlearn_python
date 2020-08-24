@@ -203,9 +203,9 @@ from tensorflow import keras
 model = keras.Sequential(
     [
         keras.layers.Dense(
-            30, activation="softmax", input_shape=(30,)
+            10, activation="softmax", input_shape=(30,)
         ),
-        keras.layers.Dense(10, activation="softmax"),
+        keras.layers.Dense(5, activation="softmax"),
         keras.layers.Dropout(0.35),
         keras.layers.Dense(1, activation="sigmoid"),
     ]
