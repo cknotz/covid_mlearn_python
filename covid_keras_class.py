@@ -194,8 +194,8 @@ X_test[:, 29] /= edu_sd
 # Build model in Keras
 ######################
 from tensorflow import keras
-from tensorflow.keras import layers
-from tensorflow.keras import regularizers
+#from tensorflow.keras import layers
+#from tensorflow.keras import regularizers
 #from tensorflow.keras import Sequential
 #from tensorflow.keras.layers import Dense
 
