@@ -205,7 +205,7 @@ model = keras.Sequential(
             30, activation="relu", input_shape=(30,)
         ),
         keras.layers.Dense(15, activation="relu"),
-        keras.layers.Dropout(0.3),
+        keras.layers.Dropout(0.75),
         keras.layers.Dense(1, activation="sigmoid"),
     ]
 )
