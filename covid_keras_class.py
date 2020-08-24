@@ -163,16 +163,13 @@ X_train.dtype
 
 # features need change of data type
 X_train = X_train.astype('float64')
-X_val = X_val.astype('float64')
 X_test = X_test.astype('float64')
 
 # labels need reshaping
 y_train = np.reshape(y_train, (len(y_train), 1))
-y_val = np.reshape(y_val, (len(y_val), 1))
 y_test = np.reshape(y_test, (len(y_test), 1))
 
 y_train.shape
-y_val.shape
 y_test.shape
 
 # Standardize (age, edu)
@@ -182,9 +179,6 @@ age_sd = np.std(X_train[:, 0])
 X_train[:, 0] -= age_mean
 X_train[:, 0] /= age_sd
 
-X_val[:, 0] -= age_mean
-X_val[:, 0] /= age_sd
-
 X_test[:, 0] -= age_mean
 X_test[:, 0] /= age_sd
 
@@ -193,9 +187,6 @@ edu_sd = np.std(X_train[:, 29])
 
 X_train[:, 29] -= edu_mean
 X_train[:, 29] /= edu_sd
-
-X_val[:, 29] -= edu_mean
-X_val[:, 29] /= edu_sd
 
 X_test[:, 29] -= edu_mean
 X_test[:, 29] /= edu_sd
