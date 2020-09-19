@@ -1,6 +1,4 @@
-## Project - Using Keras neural net for credit card fraud detection to classify COVID-cases
-
-Using machine learning methods to predict COVID-19 diagnoses in the Swiss population.
+## Project - Using machine learning methods to predict COVID-19 diagnoses in the Swiss population.
 
 Approach 1 applies a neural network in Keras. The analysis builds on the example analysis to classify credit card fraud by Fancois Chollet (https://keras.io/examples/structured_data/imbalanced_classification/).
 
