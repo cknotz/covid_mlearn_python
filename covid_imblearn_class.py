@@ -56,7 +56,7 @@ df = data[['resp_gender',
 del parpath, path, data # removing clutter
 
 df.describe()
-
+list(df.columns)
 df.head()
 
 # Checking for missings
@@ -64,3 +64,23 @@ df.isna().any().any()
 
 df.isna().sum().sum() # no
 # 'income' contains non-answers, but not coded as missings!
+
+# Dummy coding categorical predictors
+#####################################
+
+# convert four-digit postcode to one-digit, then dummy-code
+df['ZIP'].describe()
+
+df['zip_num'] = df["ZIP"].astype(str).str[:1].astype(int)
+df['zip_num'].unique()
+del df['ZIP']
+df['zip_num'].head()
+
+zip = pd.get_dummies(df.zip_num,
+                     prefix = 'zip')
+zip.head()
+
+df = df.join(zip)
+df.drop(['zip_num'],
+        axis=1,
+        inplace = True)
