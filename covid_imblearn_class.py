@@ -172,4 +172,17 @@ print(
 )
 # consider adjusting seed?
 
-# Logistic dry run
+# Logistic, dry run
+from sklearn import metrics
+from sklearn.linear_model import LogisticRegression
+
+lr = LogisticRegression(max_iter=500,
+                        penalty = 'l2',
+                        class_weight={0:0.95,1:0.05})
+
+lr.fit(X_train,y_train)
+y_pred = pd.Series(lr.predict(X_test))
+
+metrics.accuracy_score(y_test, y_pred)
+metrics.precision_score(y_test, y_pred) # terrible
+metrics.recall_score(y_test, y_pred) # terrible
