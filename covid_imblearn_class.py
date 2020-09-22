@@ -175,6 +175,7 @@ print(
 # Logistic, dry run
 from sklearn import metrics
 from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegressionCV
 
 lr = LogisticRegression(max_iter=100,
                         penalty = 'l2',
@@ -189,3 +190,21 @@ metrics.confusion_matrix(y_true = y_test,
 metrics.accuracy_score(y_test, y_pred)
 metrics.precision_score(y_test, y_pred) # terrible
 metrics.recall_score(y_test, y_pred) # terrible
+
+# Generate additional pos. cases
+################################
+
+
+
+
+
+
+
+# Logistic, cross-validated, dry-run
+lcv = LogisticRegressionCV(max_iter = 500,
+                           scoring = 'precision_score',
+                           cv = 8,
+                           Cs = 10,
+                           penalty = 'l2')
+
+lcv.fit(X_train, y_train)
