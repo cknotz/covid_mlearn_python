@@ -6,4 +6,4 @@ Approach 2 uses imbalanced classification methods implemented in sklearn based o
 
 This is work in progress.
 
-The data used here can be visually inspected here: https://idheapunitepolsoc.shinyapps.io/covid_dashboard/
+The data used here can be visually inspected at https://idheapunitepolsoc.shinyapps.io/covid_dashboard/
